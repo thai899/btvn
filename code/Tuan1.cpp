@@ -178,6 +178,30 @@ void themPhanSoTaiViTri(PhanSo arr[], int* size, PhanSo x, int k, int maxSize) {
     arr[k] = x;
     (*size)++;
 }
+void nhapMangNgauNhien(int* arr, int size) {
+    for (int i = 0; i < size; i++) {
+        arr[i] = rand() % 100;
+    }
+}
+
+
+void xuatMang(int* arr, int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+void chiaMang(int* a, int* b, int size) {
+    for (int i = 0; i < size; i++) {
+        if (b[i] == 0) {
+            printf("Phep chia %d/%d khong hop le .\n", a[i], b[i]);
+        }
+        else {
+            double ketQua = (double)a[i] / b[i];
+            printf("%d/%d = %.2f\n", a[i], b[i], ketQua);
+        }
+    }
+}
 
 
 int main()
@@ -279,6 +303,25 @@ int main()
             xoaPhanSoTaiViTri(arr, &size, k);
             printf("Mang sau khi xoa phan tu tai vi tri %d:\n", k);
             xuatMangPhanSo(arr, size);
+        }break;
+        case 5:
+        {
+            int size;
+            srand(time(NULL));
+            printf("Nhap kich thuoc mang a và b: ");
+            scanf_s("%d", &size);
+            int* a = (int*)malloc(size * sizeof(int));
+            int* b = (int*)malloc(size * sizeof(int));
+            printf("Nhap cac phan tu cua mang a:\n");
+            nhapMangNgauNhien(a, size);
+            printf("Nhap cac phan tu cua mang b:\n");
+            nhapMangNgauNhien(b, size);
+            printf("Mang a: ");
+            xuatMang(a, size);
+            printf("Mang b: ");
+            xuatMang(b, size);
+            printf("Ket qua phep chia :\n");
+            chiaMang(a, b, size);
         }break;
 		}
 	} while (lc < 6);
