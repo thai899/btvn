@@ -60,6 +60,31 @@ void xuatFibonacciTrongDoan(int m, int n) {
     }
     printf("\n");
 }
+unsigned long long fibonacciMaxLessThanNRec(unsigned long long n, int k) {
+    unsigned long long fib = fibonacci(k);
+    if (fib >= n) {
+        return fibonacci(k - 1);
+    }
+    return fibonacciMaxLessThanNRec(n, k + 1);
+}
+
+
+unsigned long long fibonacciMaxLessThanNKhuDeQuy(unsigned long long n) {
+    unsigned long long a = 1, b = 1, c;
+    if (n <= 1) {
+        return 0;
+    }
+
+    while (1) {
+        c = a + b;
+        if (c >= n) {
+            break;
+        }
+        a = b;
+        b = c;
+    }
+    return b;
+}
 
 
 int main()
@@ -109,6 +134,29 @@ int main()
 
             printf("Day so Fibonacci thuoc doan [%d, %d]:\n", m, n);
             xuatFibonacciTrongDoan(m, n);
+        }break;
+        case 3:
+        {
+            unsigned long long n;
+
+            printf("Nhap so nguyen duong n: ");
+            scanf_s("%llu", &n);
+
+            if (n <= 0) {
+                printf("Vui long nhap so nguyen duong lon hon 0.\n");
+                return 1;
+            }
+
+            int k = 1;
+            while (fibonacci(k) < n) {
+                k++;
+            }
+            unsigned long long resultRec = fibonacciMaxLessThanNRec(n, 1);
+            printf("So Fibonacci lon nhat nho hon %llu theo cach de quy la: %llu\n", n, resultRec);
+
+
+            unsigned long long resultKhuDeQuy = fibonacciMaxLessThanNKhuDeQuy(n);
+            printf("So Fibonacci lon nhat nho hon %llu theo cach khu de quy la: %llu\n", n, resultKhuDeQuy);
         }break;
         }
     } while (lc < 7);
