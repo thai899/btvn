@@ -110,6 +110,12 @@ double unDeQuy(double a, double q, int n) {
     }
     return q * unDeQuy(a, q, n - 1);
 }
+int UDeQuy(int n) {
+    if (n < 6) {
+        return n;
+    }
+    return UDeQuy(n - 5) + UDeQuy(n - 4) + UDeQuy(n - 3) + UDeQuy(n - 2) + UDeQuy(n - 1);
+}
 
 
 int main()
@@ -227,6 +233,20 @@ int main()
 
             double resultDeQuy = unDeQuy(a, q, n);
             printf("So hang thu %d cua day xn theo cach khu de quy la: %.2lf\n", n, resultDeQuy);
+        }break;
+        case 6:
+        {
+            int n;
+
+            printf("Nhap so nguyen duong n: ");
+            scanf_s("%d", &n);
+
+            if (n <= 0) {
+                printf("Vui long nhap so nguyen duong.\n");
+                return 1;
+            }
+            int resultDeQuy = UDeQuy(n);
+            printf("Gia tri cua U(%d) theo cach de quy là: %d\n", n, resultDeQuy);
         }break;
         }
     } while (lc < 12);
