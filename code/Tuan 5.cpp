@@ -148,6 +148,18 @@ int XDeQuy(int n) {
 
     return XDeQuy(n - 1) + (n - 1) * XDeQuy(n - 2);
 }
+int RDeQuy(int n) {
+   
+    if (n == 0) return 1;
+    if (n == 1) return 2;
+
+   
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += (n - i) * XDeQuy(i);
+    }
+    return sum;
+}
 
 int main()
 {
@@ -322,6 +334,20 @@ int main()
             }
             int result = XDeQuy(n);
             printf("Gia tri cua Y (%d) theo cach de quy là: %d\n", n, result);
+        }break;
+        case 10:
+        {
+            int n;
+
+            printf("Nhap so nguyen duong n: ");
+            scanf_s("%d", &n);
+
+            if (n <= 0) {
+                printf("Vui long nhap so nguyen duong.\n");
+                return 1;
+            }
+            int result = RDeQuy(n);
+            printf("Gia tri cua x(%d) theo cach de quy la: %d\n", n, result);
         }break;
         }
     } while (lc < 12);
