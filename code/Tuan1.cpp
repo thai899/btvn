@@ -111,6 +111,74 @@ bool isAlternatingEvenOdd(int arr[], int size) {
     }
     return true;
 }
+typedef struct {
+    int tu;
+    int mau;
+} PhanSo;
+
+
+void nhapMangPhanSo(PhanSo* arr, int size) {
+    for (int i = 0; i < size; i++) {
+        printf("Nhap phan so thu %d:\n", i + 1);
+        printf("Tu so: ");
+        scanf_s("%d", &arr[i].tu);
+        do {
+            printf("Mau so (khac 0): ");
+            scanf_s("%d", &arr[i].mau);
+            if (arr[i].mau == 0) {
+                printf("Mau so phai khac 0. \n");
+            }
+        } while (arr[i].mau == 0);
+    }
+}
+
+
+void xuatMangPhanSo(PhanSo* arr, int size) {
+    for (int i = 0; i < size; i++) {
+        printf("Phan so thu %d: %d/%d\n", i + 1, arr[i].tu, arr[i].mau);
+    }
+}
+double giaTriThuc(PhanSo ps) {
+    return (double)ps.tu / ps.mau;
+}
+
+
+PhanSo timPhanSoLonNhat(PhanSo arr[], int size) {
+    PhanSo max = arr[0];
+    for (int i = 1; i < size; i++) {
+        if (giaTriThuc(arr[i]) > giaTriThuc(max)) {
+            max = arr[i];
+        }
+    }
+    return max;
+}
+void xoaPhanSoTaiViTri(PhanSo arr[], int* size, int k) {
+    if (k < 0 || k >= *size) {
+        printf("Vi tri k khong hop le\n");
+        return;
+    }
+    for (int i = k; i < *size - 1; i++) {
+        arr[i] = arr[i + 1];
+    }
+    (*size)--;
+}
+
+void themPhanSoTaiViTri(PhanSo arr[], int* size, PhanSo x, int k, int maxSize) {
+    if (k < 0 || k > *size) {
+        printf("Vi tri k khong hop le\n");
+        return;
+    }
+    if (*size >= maxSize) {
+        printf("Mang đa đay\n");
+        return;
+    }
+    for (int i = *size; i > k; i--) {
+        arr[i] = arr[i - 1];
+    }
+    arr[k] = x;
+    (*size)++;
+}
+
 
 int main()
 {
@@ -194,6 +262,23 @@ int main()
             else {
                 printf("Mang khong chua cac so chan le xen ke.\n");
             }
+        }break;
+        case 4:
+        {
+            PhanSo arr[100];
+            int size;
+            int choice, k;
+            printf("Nhap kich thuoc mang: ");
+            scanf_s("%d", &size);
+            nhapMangPhanSo(arr, size);
+            xuatMangPhanSo(arr, size);
+            PhanSo max = timPhanSoLonNhat(arr, size);
+            printf("Phan so lon nhat la %d/%d\n", max.tu, max.mau);
+            printf("Nhap vi tri k de xoa: ");
+            scanf_s("%d", &k);
+            xoaPhanSoTaiViTri(arr, &size, k);
+            printf("Mang sau khi xoa phan tu tai vi tri %d:\n", k);
+            xuatMangPhanSo(arr, size);
         }break;
 		}
 	} while (lc < 6);
