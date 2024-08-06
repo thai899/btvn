@@ -114,6 +114,40 @@ void sapXepDuongCheo(int** a, int m, int n) {
         }
     }
 }
+void diChuyenChanLenTren(int** a, int m, int n) {
+    int* even = (int*)malloc(m * n * sizeof(int));
+    int* odd = (int*)malloc(m * n * sizeof(int));
+    int eIndex = 0, oIndex = 0;
+
+   
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            if (a[i][j] % 2 == 0) {
+                even[eIndex++] = a[i][j];
+            }
+            else {
+                odd[oIndex++] = a[i][j];
+            }
+        }
+    }
+
+   
+    int index = 0;
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            if (index < eIndex) {
+                a[i][j] = even[index++];
+            }
+            else {
+                a[i][j] = odd[index++ - eIndex];
+            }
+        }
+    }
+
+    free(even);
+    free(odd);
+}
+
 
 int main()
 {
@@ -186,6 +220,21 @@ int main()
             printf(" ma tran ");
             printf("\n");
             sapXepDuongCheo(a, m, n);
+            xuatMaTran(a, m, n);
+        }break;
+        case 5 :
+        {
+            printf("Nhap so dong va so cot cua ma tran: ");
+            scanf_s("%d %d", &m, &n);
+            int** a = (int**)malloc(m * sizeof(int*));
+            for (int i = 0; i < m; i++) {
+                a[i] = (int*)malloc(n * sizeof(int));
+            }
+            taoMaTran(a, m, n);
+            xuatMaTran(a, m, n);
+            printf(" ma tran ");
+            printf("\n");
+            diChuyenChanLenTren(a, m, n);
             xuatMaTran(a, m, n);
         }break;
         }
