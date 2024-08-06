@@ -13,6 +13,33 @@ void calculate(int* pa, int* pb, int* sum, int* diff, int* product, float* quoti
     *product = *pa * *pb;
     *quotient = (float)*pa / *pb;
 }
+void to_uppercase(char* str) {
+    while (*str) {
+        if (islower(*str)) {
+            *str = toupper(*str);
+        }
+        str++;
+    }
+}
+
+
+void capitalize_words(char* str) {
+    int capitalize = 1;
+    while (*str) {
+        if (isspace(*str)) {
+            capitalize = 1;
+        }
+        else if (capitalize && islower(*str)) {
+            *str = toupper(*str);
+            capitalize = 0;
+        }
+        else {
+            capitalize = 0;
+        }
+        str++;
+    }
+}
+
 int main()
 {
 	int lc;
@@ -20,6 +47,7 @@ int main()
 		menu();
 		printf("\nMoi ban chon ");
 		scanf_s("%d", &lc);
+        getchar();
 		switch (lc)
 		{
 		case 1 :
@@ -43,6 +71,24 @@ int main()
             printf("Thuong: %.2f,  dia chi: %p\n", quotient, (void*)&quotient);
 
 		}break;
+        case 2:
+        {
+            char st[100];
+            printf("Nhap vao chuoi: ");
+            fgets(st, sizeof(st), stdin);
+            st[strcspn(st, "\n")] = 0;
+            char* p = st;
+            printf("Cac ky tu cua chuoi:\n");
+            while (*p) {
+                printf("%c ", *p);
+                p++;
+            }
+            printf("\n");
+            capitalize_words(st);
+            printf("Chuoi sau khi chuyen ky tu dau moi tu thanh chu hoa: %s\n", st);
+            to_uppercase(st);
+            printf("Chuoi sau khi chuyen thanh chu hoa: %s\n", st);
+        }break;
 		}
 	} while (lc < 6);
 	return 0;
