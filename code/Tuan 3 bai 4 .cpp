@@ -57,6 +57,19 @@ void sapXepDuongCheoPhu(int** a, int m, int n, int tangDan) {
         a[i][n - 1 - i] = diagonal[index++];
     }
 }
+void sapXepDong(int** a, int m, int n) {
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n - 1; j++) {
+            for (int k = j + 1; k < n; k++) {
+                if ((i % 2 == 0 && a[i][j] < a[i][k]) || (i % 2 != 0 && a[i][j] > a[i][k])) {
+                    int temp = a[i][j];
+                    a[i][j] = a[i][k];
+                    a[i][k] = temp;
+                }
+            }
+        }
+    }
+}
 int main()
 {
     int lc;
@@ -83,6 +96,21 @@ int main()
             int tangDan;
             scanf_s("%d", &tangDan);
             sapXepDuongCheoPhu(a, m, n, tangDan);
+            xuatMaTran(a, m, n);
+        }break;
+        case 2:
+        {
+            printf("Nhap so dong va so cot cua ma tran: ");
+            scanf_s("%d %d", &m, &n);
+            int** a = (int**)malloc(m * sizeof(int*));
+            for (int i = 0; i < m; i++) {
+                a[i] = (int*)malloc(n * sizeof(int));
+            }
+            taoMaTran(a, m, n);
+            xuatMaTran(a, m, n);
+            printf(" ma tran ");
+            printf("\n");
+            sapXepDong(a, m, n);
             xuatMaTran(a, m, n);
         }break;
         }
