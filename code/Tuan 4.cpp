@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <limits.h>
+#include<string.h>
 
 void menu()
 {
@@ -39,7 +40,16 @@ int kiemTraDoiXung(const char* str) {
     }
     return 1;  
 }
-
+void timHoacNoiChuoi(char* s1, const char* s2) {
+    char* pos = strstr(s1, s2);
+    if (pos) {
+        printf("Vi tri xuat hien cua chuoi '%s' trong chuoi '%s': %ld\n", s2, s1, pos - s1);
+    }
+    else {
+        strcat(s1, s2);
+        printf("Chuoi '%s' khong co trong chuoi '%s'. Chuoi moi sau khi noi: '%s'\n", s2, s1, s1);
+    }
+}
 
 int main()
 {
@@ -64,7 +74,14 @@ int main()
             }
 
         }break;
-        
+        case 2:
+        {
+            printf("Nhap chuoi s1: ");
+            nhapChuoi(s1, sizeof(s1));
+            printf("Nhap chuoi s2: ");
+            nhapChuoi(s2, sizeof(s2));
+            timHoacNoiChuoi(s1, s2);
+        }break;
         }
     } while (lc < 7);
     return 0;
