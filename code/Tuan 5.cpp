@@ -116,7 +116,21 @@ int UDeQuy(int n) {
     }
     return UDeQuy(n - 5) + UDeQuy(n - 4) + UDeQuy(n - 3) + UDeQuy(n - 2) + UDeQuy(n - 1);
 }
+int AnDeQuy(int n) {
 
+    if (n == 1) {
+        return 1;
+    }
+
+
+    int sum = 0;
+    for (int i = 1; i < n; i++) {
+        sum += AnDeQuy(i);
+    }
+
+
+    return n * sum;
+}
 
 int main()
 {
@@ -247,6 +261,21 @@ int main()
             }
             int resultDeQuy = UDeQuy(n);
             printf("Gia tri cua U(%d) theo cach de quy là: %d\n", n, resultDeQuy);
+        }break;
+        case 7:
+        {
+
+            int n;
+
+            printf("Nhap so nguyen duong n: ");
+            scanf_s("%d", &n);
+
+            if (n <= 0) {
+                printf("Vui long nhap so nguyen duong.\n");
+                return 1;
+            }
+            int result = AnDeQuy(n);
+            printf("Gia tri cua A(%d) theo cach de quy là: %d\n", n, result);
         }break;
         }
     } while (lc < 12);
