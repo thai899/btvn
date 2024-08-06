@@ -64,6 +64,18 @@ void chenChuoi(char* str, const char* strInsert, int vt) {
 
     printf("Chuoi sau khi chen: '%s'\n", str);
 }
+void xoaKiTu(char* str, char c) {
+    char* ptr = str;
+    while (*ptr) {
+        if (*ptr == c) {
+            memmove(ptr, ptr + 1, strlen(ptr));
+        }
+        else {
+            ptr++;
+        }
+    }
+    printf("Chuoi sau khi xoa ky tu '%c': '%s'\n", c, str);
+}
 
 
 int main()
@@ -107,6 +119,15 @@ int main()
             scanf_s("%d", &vt);
             getchar();
             chenChuoi(str, strInsert, vt);
+        }break;
+        case 4:
+        {
+            printf("Nhap chuoi: ");
+            nhapChuoi(str, sizeof(str));
+            printf("Nhap ky tu can xoa: ");
+            char c;
+            scanf_s("%c", &c);
+            xoaKiTu(str, c);
         }break;
         }
     } while (lc < 7);
