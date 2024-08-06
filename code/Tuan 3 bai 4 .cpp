@@ -83,6 +83,37 @@ void sapXepCot(int** a, int m, int n) {
         }
     }
 }
+void sapXepDuongCheo(int** a, int m, int n) {
+    for (int k = -(m - 1); k < n; k++) {
+        int len = 0;
+        int diagonal[5];
+        for (int i = 0; i < m; i++) {
+            int j = i + k;
+            if (j >= 0 && j < n) {
+                diagonal[len++] = a[i][j];
+            }
+        }
+
+        for (int i = 0; i < len - 1; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (diagonal[i] > diagonal[j]) {
+                    int temp = diagonal[i];
+                    diagonal[i] = diagonal[j];
+                    diagonal[j] = temp;
+                }
+            }
+        }
+
+
+        len = 0;
+        for (int i = 0; i < m; i++) {
+            int j = i + k;
+            if (j >= 0 && j < n) {
+                a[i][j] = diagonal[len++];
+            }
+        }
+    }
+}
 
 int main()
 {
@@ -140,6 +171,21 @@ int main()
             printf(" ma tran ");
             printf("\n");
             sapXepCot(a, m, n);
+            xuatMaTran(a, m, n);
+        }break;
+        case 4:
+        {
+            printf("Nhap so dong va so cot cua ma tran: ");
+            scanf_s("%d %d", &m, &n);
+            int** a = (int**)malloc(m * sizeof(int*));
+            for (int i = 0; i < m; i++) {
+                a[i] = (int*)malloc(n * sizeof(int));
+            }
+            taoMaTran(a, m, n);
+            xuatMaTran(a, m, n);
+            printf(" ma tran ");
+            printf("\n");
+            sapXepDuongCheo(a, m, n);
             xuatMaTran(a, m, n);
         }break;
         }
