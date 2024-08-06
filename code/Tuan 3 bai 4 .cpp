@@ -70,6 +70,20 @@ void sapXepDong(int** a, int m, int n) {
         }
     }
 }
+void sapXepCot(int** a, int m, int n) {
+    for (int j = 0; j < n; j++) {
+        for (int i = 0; i < m - 1; i++) {
+            for (int k = i + 1; k < m; k++) {
+                if ((j % 2 == 0 && a[i][j] > a[k][j]) || (j % 2 != 0 && a[i][j] < a[k][j])) {
+                    int temp = a[i][j];
+                    a[i][j] = a[k][j];
+                    a[k][j] = temp;
+                }
+            }
+        }
+    }
+}
+
 int main()
 {
     int lc;
@@ -111,6 +125,21 @@ int main()
             printf(" ma tran ");
             printf("\n");
             sapXepDong(a, m, n);
+            xuatMaTran(a, m, n);
+        }break;
+        case 3:
+        {
+            printf("Nhap so dong va so cot cua ma tran: ");
+            scanf_s("%d %d", &m, &n);
+            int** a = (int**)malloc(m * sizeof(int*));
+            for (int i = 0; i < m; i++) {
+                a[i] = (int*)malloc(n * sizeof(int));
+            }
+            taoMaTran(a, m, n);
+            xuatMaTran(a, m, n);
+            printf(" ma tran ");
+            printf("\n");
+            sapXepCot(a, m, n);
             xuatMaTran(a, m, n);
         }break;
         }
