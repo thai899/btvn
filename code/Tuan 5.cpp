@@ -131,7 +131,14 @@ int AnDeQuy(int n) {
 
     return n * sum;
 }
+int YDeQuyTrucTiep(int n) {
 
+    if (n == 1) return 1;
+    if (n == 2) return 2;
+    if (n == 3) return 3;
+
+    return YDeQuyTrucTiep(n - 1) + 2 * YDeQuyTrucTiep(n - 2) + 3 * YDeQuyTrucTiep(n - 3);
+}
 int main()
 {
     int lc;
@@ -276,6 +283,20 @@ int main()
             }
             int result = AnDeQuy(n);
             printf("Gia tri cua A(%d) theo cach de quy là: %d\n", n, result);
+        }break;
+        case 8:
+        {
+            int n;
+
+            printf("Nhap so nguyen duong n: ");
+            scanf_s("%d", &n);
+
+            if (n <= 0) {
+                printf("Vui long nhap so nguyen duong.\n");
+                return 1;
+            }
+            int resultTrucTiep = YDeQuyTrucTiep(n);
+            printf("Gia tri cua Y (%d) theo cach de quy truc tiep la: %d\n", n, resultTrucTiep);
         }break;
         }
     } while (lc < 12);
