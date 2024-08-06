@@ -160,6 +160,22 @@ int RDeQuy(int n) {
     }
     return sum;
 }
+int ADeQuy(int n) {
+
+    if (n == 1) return 1;
+
+
+    if (n % 2 == 0) {
+
+        int k = n / 2;
+        return k + ADeQuy(k) + 2;
+    }
+    else {
+
+        int k = (n - 1) / 2;
+        return k * k + ADeQuy(k) * ADeQuy(k + 1) + 1;
+    }
+}
 
 int main()
 {
@@ -348,6 +364,20 @@ int main()
             }
             int result = RDeQuy(n);
             printf("Gia tri cua x(%d) theo cach de quy la: %d\n", n, result);
+        }break;
+        case 11:
+        {
+            int n;
+
+            printf("Nhap so nguyen duong n: ");
+            scanf_s("%d", &n);
+
+            if (n <= 0) {
+                printf("Vui long nhap so nguyen duong.\n");
+                return 1;
+            }
+            int result = ADeQuy(n);
+            printf("Gia tri cua A(%d) theo cach de quy la: %d\n", n, result);
         }break;
         }
     } while (lc < 12);
