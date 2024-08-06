@@ -76,7 +76,20 @@ void xoaKiTu(char* str, char c) {
     }
     printf("Chuoi sau khi xoa ky tu '%c': '%s'\n", c, str);
 }
-
+void timChuoiChuaToanSo(char** arr, int n) {
+    for (int i = 0; i < n; i++) {
+        int isAllDigits = 1;
+        for (int j = 0; j < strlen(arr[i]); j++) {
+            if (!isdigit(arr[i][j])) {
+                isAllDigits = 0;
+                break;
+            }
+        }
+        if (isAllDigits) {
+            printf("Chuoi chua toan ky tu so: '%s'\n", arr[i]);
+        }
+    }
+}
 
 int main()
 {
@@ -128,6 +141,27 @@ int main()
             char c;
             scanf_s("%c", &c);
             xoaKiTu(str, c);
+        }break;
+        case 5 :
+        {
+            printf("Nhap so luong chuoi: ");
+            int n;
+            scanf_s("%d", &n);
+            getchar();
+
+            char** arr = (char**)malloc(n * sizeof(char*));
+            for (int i = 0; i < n; i++) {
+                arr[i] = (char*)malloc(256 * sizeof(char));
+                printf("Nhap chuoi %d: ", i + 1);
+                nhapChuoi(arr[i], 256);
+            }
+
+            timChuoiChuaToanSo(arr, n);
+
+            for (int i = 0; i < n; i++) {
+                free(arr[i]);
+            }
+            free(arr);
         }break;
         }
     } while (lc < 7);
