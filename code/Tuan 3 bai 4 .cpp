@@ -147,7 +147,15 @@ void diChuyenChanLenTren(int** a, int m, int n) {
     free(even);
     free(odd);
 }
-
+int kiemTraDoiXung(int** a, int m, int n) {
+    if (m != n) return 0;
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            if (a[i][j] != a[j][i]) return 0;
+        }
+    }
+    return 1;
+}
 
 int main()
 {
@@ -237,6 +245,23 @@ int main()
             diChuyenChanLenTren(a, m, n);
             xuatMaTran(a, m, n);
         }break;
+        case 6:
+        {
+            printf("Nhap so dong va so cot cua ma tran: ");
+            scanf_s("%d %d", &m, &n);
+            int** a = (int**)malloc(m * sizeof(int*));
+            for (int i = 0; i < m; i++) {
+                a[i] = (int*)malloc(n * sizeof(int));
+            }
+            taoMaTran(a, m, n);
+            xuatMaTran(a, m, n);
+            if (kiemTraDoiXung(a, m, n)) {
+                printf("Ma tran doi xung qua duong cheo chinh.\n");
+            }
+            else {
+                printf("Ma tran khong doi xung qua duong cheo chinh.\n");
+            }
+        } break;
         }
     } while (lc < 7);
     return 0;
