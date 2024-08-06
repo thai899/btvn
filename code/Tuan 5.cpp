@@ -1,5 +1,5 @@
 ﻿#include <stdio.h>
-
+#include <math.h> 
 
 void menu()
 {
@@ -8,12 +8,13 @@ void menu()
     printf("\n3.Bai 11");
     printf("\n4.Bai 12");
     printf("\n5.Bai 13");
-    printf("\n5.Bai 14");
-    printf("\n5.Bai 15");
-    printf("\n5.Bai 16");
-    printf("\n5.Bai 17");
-    printf("\n5.Bai 18");
-    printf("\n5.Bai 19");
+    printf("\n6.Bai 14");
+    printf("\n7.Bai 15");
+    printf("\n8.Bai 16");
+    printf("\n9.Bai 17");
+    printf("\n10.Bai 18");
+    printf("\n11.Bai 19");
+
    
 }
 double S_deQuy(int n) {
@@ -84,6 +85,30 @@ unsigned long long fibonacciMaxLessThanNKhuDeQuy(unsigned long long n) {
         b = c;
     }
     return b;
+}
+
+int xnDeQuy(int n);
+int ynDeQuy(int n);
+void tinhDaiHinhKhuDeQuy(int n, int* x, int* y) {
+    int xPrev = 1, yPrev = 0;
+    int xCurrent, yCurrent;
+
+    for (int i = 1; i <= n; i++) {
+        xCurrent = xPrev + yPrev;
+        yCurrent = 3 * xPrev + 2 * yPrev;
+
+        xPrev = xCurrent;
+        yPrev = yCurrent;
+    }
+
+    *x = xPrev;
+    *y = yPrev;
+}
+double unDeQuy(double a, double q, int n) {
+    if (n == 1) {
+        return a;
+    }
+    return q * unDeQuy(a, q, n - 1);
 }
 
 
@@ -158,7 +183,66 @@ int main()
             unsigned long long resultKhuDeQuy = fibonacciMaxLessThanNKhuDeQuy(n);
             printf("So Fibonacci lon nhat nho hon %llu theo cach khu de quy la: %llu\n", n, resultKhuDeQuy);
         }break;
+        case 4:
+        {
+            int n;
+
+            printf("Nhap chi so n: ");
+            scanf_s("%d", &n);
+
+            if (n < 0) {
+                printf("Chi so n phai la so nguyen khong am\n");
+                return 1;
+            }
+
+
+            int xnRec = xnDeQuy(n);
+            int ynRec = ynDeQuy(n);
+            printf("So hang thu %d cua day xn theo cach de quy la: %d\n", n, xnRec);
+            printf("So hang thu %d cua day yn theo cach de quy la: %d\n", n, ynRec);
+
+
+            int xnKhuDeQuy, ynKhuDeQuy;
+            tinhDaiHinhKhuDeQuy(n, &xnKhuDeQuy, &ynKhuDeQuy);
+            printf("So hang thu %d cua day xn theo cach khu de quy la: %d\n", n, xnKhuDeQuy);
+            printf("So hang thu %d cua day yn theo cach khu de quy la: %d\n", n, ynKhuDeQuy);
+        }break;
+        case 5:
+        {
+            double a, q;
+            int n;
+
+            printf("Nhap hang dau a: ");
+            scanf_s("%lf", &a);
+            printf("Nhap cong boi q: ");
+            scanf_s("%lf", &q);
+            printf("Nhap chi so phan tu n: ");
+            scanf_s("%d", &n);
+
+            if (n <= 0) {
+                printf("Chi so n phai la so nguyen duong.\n");
+                return 1;
+            }
+
+
+            double resultDeQuy = unDeQuy(a, q, n);
+            printf("So hang thu %d cua day xn theo cach khu de quy la: %.2lf\n", n, resultDeQuy);
+        }break;
         }
-    } while (lc < 7);
+    } while (lc < 12);
     return 0;
+}
+int xnDeQuy(int n) {
+    if (n == 0) {
+        return 1;
+    }
+    return xnDeQuy(n - 1) + ynDeQuy(n - 1);
+}
+
+
+int ynDeQuy(int n) {
+    if (n == 0) {
+        return 0;
+    }
+    return 3 * xnDeQuy(n - 1) + 2 * ynDeQuy(n - 1);
 }
