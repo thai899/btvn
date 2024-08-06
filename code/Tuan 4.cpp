@@ -50,6 +50,21 @@ void timHoacNoiChuoi(char* s1, const char* s2) {
         printf("Chuoi '%s' khong co trong chuoi '%s'. Chuoi moi sau khi noi: '%s'\n", s2, s1, s1);
     }
 }
+void chenChuoi(char* str, const char* strInsert, int vt) {
+    int lenStr = strlen(str);
+    int lenInsert = strlen(strInsert);
+
+    if (vt < 0 || vt > lenStr) {
+        printf("Vi tri chen khong hop le.\n");
+        return;
+    }
+
+    memmove(str + vt + lenInsert, str + vt, lenStr - vt + 1);
+    memcpy(str + vt, strInsert, lenInsert);
+
+    printf("Chuoi sau khi chen: '%s'\n", str);
+}
+
 
 int main()
 {
@@ -81,6 +96,17 @@ int main()
             printf("Nhap chuoi s2: ");
             nhapChuoi(s2, sizeof(s2));
             timHoacNoiChuoi(s1, s2);
+        }break;
+        case 3:
+        {
+            printf("Nhap chuoi goc: ");
+            nhapChuoi(str, sizeof(str));
+            printf("Nhap chuoi can chen: ");
+            nhapChuoi(strInsert, sizeof(strInsert));
+            printf("Nhap vi tri can chen: ");
+            scanf_s("%d", &vt);
+            getchar();
+            chenChuoi(str, strInsert, vt);
         }break;
         }
     } while (lc < 7);
